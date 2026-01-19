@@ -1,0 +1,9 @@
+<ul>
+  {% for book in books %}
+  <li>
+    {{ book.title }} - {{ book.price }}
+    <a href="{% url 'cart:add_to_cart' book.id %}">Add to Cart</a>
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'cart:view_cart' %}">View Cart</a>
