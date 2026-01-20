@@ -1,9 +1,23 @@
-<ul>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+<nav class="spaced muted">
+  {% if request.session.customer_id %} Logged in —
+  <a href="{% url 'cart:view_cart' %}">View Cart</a> ·
+  <a href="{% url 'accounts:logout' %}">Logout</a>
+  {% else %}
+  <a href="{% url 'accounts:login' %}">Login</a> or
+  <a href="{% url 'accounts:register' %}">Register</a> to add items {% endif %}
+</nav>
+
+<ul class="book-list">
   {% for book in books %}
   <li>
-    {{ book.title }} - {{ book.price }}
-    <a href="{% url 'cart:add_to_cart' book.id %}">Add to Cart</a>
+    <span>{{ book.title }} - {{ book.price }}</span>
+    {% if request.session.customer_id %}
+    <a class="btn" href="{% url 'cart:add_to_cart' book.id %}">Add to Cart</a>
+    {% else %}
+    <a class="btn" href="{% url 'accounts:login' %}">Login to Add</a>
+    {% endif %}
   </li>
   {% endfor %}
 </ul>
-<a href="{% url 'cart:view_cart' %}">View Cart</a>

@@ -1,5 +1,14 @@
-<form method="post">
-  {% csrf_token %} Email: <input name="email" /><br />
-  Password: <input name="password" type="password" /><br />
-  <button type="submit">Login</button>
-</form>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+<div class="form-card">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <label>Email:</label><input name="email" type="email" />
+    </div>
+    <div class="form-row">
+      <label>Password:</label><input name="password" type="password" />
+    </div>
+    <div class="form-row spaced"><button type="submit">Login</button></div>
+  </form>
+</div>

@@ -1,5 +1,22 @@
-<ul>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+<ul class="book-list">
   {% for item in items %}
-  <li>{{ item.book.title }} - Quantity: {{ item.quantity }}</li>
+  <li>
+    <div>
+      <strong>{{ item.book.title }}</strong>
+      <div class="muted">Quantity: {{ item.quantity }}</div>
+    </div>
+    <div>
+      <a class="btn" href="{% url 'cart:remove_from_cart' item.book.id %}"
+        >Remove</a
+      >
+    </div>
+  </li>
   {% endfor %}
 </ul>
+
+<div class="spaced">
+  <a class="btn" href="{% url 'books:catalog' %}">Continue Shopping</a>
+</div>

@@ -23,3 +23,13 @@ def login(request):
         except:
             pass
     return render(request, 'accounts/login.html')
+
+
+def logout_view(request):
+    # Remove the simple session key used for authentication
+    if 'customer_id' in request.session:
+        try:
+            del request.session['customer_id']
+        except KeyError:
+            pass
+    return redirect('books:catalog')
